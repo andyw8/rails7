@@ -29,11 +29,10 @@ jobs:
         PGUSER: postgres
         PGPASSWORD: postgres
         RAILS_ENV: test
-      run: |
-        ${{ inputs.run-before-tests }}
-        bundle exec rails db:setup
+      # run: |
+      #   ${{ inputs.run-before-tests }}
+      #   bundle exec rails db:setup
 
     - name: Run tests
       if: ${{ inputs.rspec != true }}
-      run: |
-        bin/rails test
+      run: bin/rails test
