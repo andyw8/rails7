@@ -5,34 +5,12 @@ jobs:
   tests:
     name: Tests
     runs-on: windows-latest
-    # services:
-    #   postgres:
-    #     image: postgres:12.7
-    #     env:
-    #       POSTGRES_USER: postgres
-    #       POSTGRES_PASSWORD: postgres
-    #     ports: ["5432:5432"]
     steps:
-    - name: Check out code
-      uses: actions/checkout@v4
-    # - name: Install libvips
-    #   run: |
-    #     sudo apt-get install -y -qq libvips
-
-    - name: Set up Ruby and install gems
-      uses: ruby/setup-ruby@v1
-      with:
-        bundler-cache: true
-    - name: Set up test database
-      env:
-        PGHOST: localhost
-        PGUSER: postgres
-        PGPASSWORD: postgres
-        RAILS_ENV: test
-      # run: |
-      #   ${{ inputs.run-before-tests }}
-      #   bundle exec rails db:setup
-
-    - name: Run tests
-      if: ${{ inputs.rspec != true }}
-      run: bin/rails test
+      - name: Check out code
+        uses: actions/checkout@v4
+      - name: Set up Ruby and install gems
+        uses: ruby/setup-ruby@v1
+        with:
+          bundler-cache: true
+      - name: Run tests
+        run: bin/rails test
